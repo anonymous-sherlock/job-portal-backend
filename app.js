@@ -7,13 +7,9 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 dotenv.config();
 const app = express();
-const corsOptions = {
-    origin: 'https://work-buzz.netlify.app',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Enable credentials (cookies, etc.)
-};
+
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors({credentials: true, origin: true, withCredentials: true }))
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use('/uploads',express.static("./uploads"));
