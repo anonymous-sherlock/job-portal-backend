@@ -103,7 +103,9 @@ exports.userLogin = async (req, res) => {
             expires: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
             httpOnly: true,
             secure: true,
-            sameSite: 'None' // Corrected, added quotes
+            sameSite: 'None',
+            domain:"https://work-buzz.netlify.app"
+             // Corrected, added quotes
         }).json({
             success: true,
             message: 'Login successfully ',
