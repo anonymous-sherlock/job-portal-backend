@@ -52,7 +52,8 @@ exports.userRegister = async (req, res) => {
                 // 4 days 
                 expires: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
                 httpOnly: true,
-                secure:true
+                secure: true,
+                sameSite: 'None'
             }).json({
                 success: true,
                 message: "register successfuly",
@@ -75,23 +76,25 @@ exports.userLogin = async (req, res) => {
     try {
 
         const { email, password } = req.body;
-        // chech the user is exist or not 
+        // check if the user exists
+
         const user = await User.findOne({ email });
+
         if (!user) {
             return res.json({
                 success: false,
                 message: 'User not found'
-            })
+            });
         }
 
-        // matching password
 
+        // match password
         const isMatch = await user.matchPassword(password);
         if (!isMatch) {
             return res.json({
                 success: false,
                 message: 'Wrong Password or Email'
-            })
+            });
         }
 
         // generate the token
@@ -100,21 +103,22 @@ exports.userLogin = async (req, res) => {
             expires: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
             httpOnly: true,
             secure: true,
-            sameSite:None
+            sameSite: 'None' // Corrected, added quotes
         }).json({
             success: true,
-            message: 'Login successfuly ',
+            message: 'Login successfully ',
             user,
             token
-        })
+        });
 
     } catch (error) {
         res.json({
             success: false,
-            message: error.messsage
-        })
+            message: error.message // Corrected typo
+        });
     }
-}
+};
+
 
 // logged user
 
