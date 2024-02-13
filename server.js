@@ -7,5 +7,5 @@ app.use('/',(req,res)=>{
 res.send("Welcome")
 })
 app.listen(PORT,()=>{
-    console.log(`server is running on http//localhost:${PORT}`);
+    console.log(`server is running on http://localhost:${PORT}`);
 })

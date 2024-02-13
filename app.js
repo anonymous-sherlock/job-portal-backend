@@ -4,11 +4,16 @@ const userRoute = require('./Routes/userRoute');
 const jobRoute = require('./Routes/jobRoute');
 const applyRoute = require('./Routes/applyRoute');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
 const cors = require('cors');
 
 dotenv.config();
 const app = express();
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 app.use(express.json());
 app.use(cors({ credentials: true, origin: true }));
 app.use(express.urlencoded({ extended: true }));
